@@ -187,3 +187,63 @@ public class ChatController {
         return "";
     }
 }
+//package com.client.mcp;
+//
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
+//import org.springframework.ai.chat.client.ChatClient;
+//import org.springframework.ai.tool.ToolCallbackProvider;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.Arrays;
+//
+//@RestController
+//public class ChatController {
+//
+//    Logger log = LogManager.getLogger(ChatController.class);
+//    private final ChatClient chatClient;
+//
+//    public ChatController(ChatClient.Builder builder, ToolCallbackProvider tools) {
+//
+//        Arrays.stream(tools.getToolCallbacks()).forEach(t ->
+//                log.info("Tool Callback found: {}", t.getToolDefinition())
+//        );
+//
+//        this.chatClient = builder
+//                .defaultToolCallbacks(tools)
+//                .build();
+//    }
+//
+//    @GetMapping("/chat")
+//    public String chat(@RequestParam String message) {
+//
+//        var response = chatClient.prompt()
+//            .system("""
+//    You are an assistant connected to a Splunk MCP server.
+//
+//    You MUST use tools when the user asks about:
+//    - indexes
+//    - logs
+//    - events
+//    - searching Splunk
+//    - sending data to Splunk
+//
+//    Available tools:
+//    - splunk_list_indexes
+//    - splunk_search
+//    - splunk_get_search_results
+//    - splunk_send_event
+//
+//    If a tool is relevant, CALL IT.
+//    Do NOT answer from your own knowledge.
+//    After receiving tool output, repeat it EXACTLY.
+//    """)
+//            .user(message)
+//            .call()
+//            .content();
+//        
+//        return response;
+//    }
+//
+//
+//}
